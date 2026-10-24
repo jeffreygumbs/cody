@@ -1,16 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import {Configuration, OpenAIApi} from 'openai';
+import {GoogleGenAI} from '@google/genai';
 
-dotenv.config();
+dotenv.config({quiet: true});
 const port = process.env.PORT || 8080;
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
 });
-
-const openai = new OpenAIApi(configuration);
 
 const app = express();
 app.use(cors());
@@ -25,17 +23,16 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
   try {
     const prompt = req.body.prompt;
-    const response = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `${prompt}`,
-      temperature: 0,
-      max_tokens: 3000,
-      top_p: 1,
-      frequency_penalty: 0.5,
-      presence_penalty: 0,
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: `${prompt}`,
+      config: {
+        temperature: 0,
+        maxOutputTokens: 3000,
+      },
     });
     res.status(200).send({
-      bot: response.data.choices[0].text,
+      bot: response.text,
     });
   } catch (error) {
     console.log(error);

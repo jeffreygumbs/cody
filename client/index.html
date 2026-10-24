@@ -5,27 +5,48 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <title>Cody - Your Coding AI Companion</title>
+    <title>Cody — Your Coding AI Companion</title>
   </head>
   <body>
-    <header></header>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <div class="brand-text">
+          <h1>Cody</h1>
+          <p>Your coding AI companion</p>
+        </div>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Powered by Gemini
+      </div>
+    </header>
+
     <div id="app">
       <div id="chat_container"></div>
-      <form>
-        <textarea
-          name="prompt"
-          placeholder="Ask Cody..."
-          cols="1"
-          rows="1"
-        ></textarea>
-        <button type="submit">
-          <img src="assets/send.svg" alt="send" />
-        </button>
-      </form>
+
+      <div class="composer">
+        <form>
+          <textarea
+            name="prompt"
+            placeholder="Ask Cody anything..."
+            rows="1"
+          ></textarea>
+          <button type="submit" aria-label="Send message">
+            <img src="assets/send.svg" alt="send" />
+          </button>
+        </form>
+        <p class="hint">Enter to send · Shift + Enter for a new line</p>
+      </div>
     </div>
+
     <footer>
-      <p id="footer">This project was coded by Jeffrey Gumbs</p>
+      <p id="footer">Coded by Jeffrey Gumbs</p>
     </footer>
+
     <script type="module" src="script.js"></script>
   </body>
 </html>
